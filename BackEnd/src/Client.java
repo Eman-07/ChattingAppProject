@@ -57,12 +57,17 @@ public class Client extends JFrame implements Runnable {
         JButton manageContactsButton = new JButton("Manage Contacts");
         manageContactsButton.addActionListener(e -> openContactManagement());
 
-        JButton viewBlockedButton = new JButton("View Blocked Contacts");
-        viewBlockedButton.addActionListener(e -> viewBlockedContacts());
+        //Adding button to Show creators of applicatio
+        JButton creatorsInfoButton = new JButton("Creators Info");
+        creatorsInfoButton.addActionListener(e -> viewCreators() );
+
+//        JButton viewBlockedButton = new JButton("View Blocked Contacts");
+//        viewBlockedButton.addActionListener(e -> viewBlockedContacts());
 
         JPanel topPanel = new JPanel();
         topPanel.add(manageContactsButton);
-        topPanel.add(viewBlockedButton);
+        topPanel.add(creatorsInfoButton);
+//        topPanel.add(viewBlockedButton);
 
         add(topPanel, "North");
         add(scrollPane, "Center");
@@ -80,7 +85,7 @@ public class Client extends JFrame implements Runnable {
     }
 
     private void openContactManagement() {
-        String[] options = {"Add Contact", "Remove Contact", "Block Contact"};
+        String[] options = {"Add Contact", "Remove Contact", "Block Contact", "View All contacts" , "View Blocked contacts"};
         int choice = JOptionPane.showOptionDialog(this, "Choose an option:", "Manage Contacts",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
@@ -88,6 +93,8 @@ public class Client extends JFrame implements Runnable {
             case 0 -> addContact();
             case 1 -> removeContact();
             case 2 -> blockContact();
+            case 3 -> viewAllContacts();
+            case 4 -> viewBlockedContacts();
         }
     }
 
@@ -99,6 +106,7 @@ public class Client extends JFrame implements Runnable {
         contacts.put(id, contact);
         JOptionPane.showMessageDialog(this, "Contact added successfully!");
     }
+
 
     private void removeContact() {
         String id = JOptionPane.showInputDialog(this, "Enter Contact ID to remove:");
@@ -120,6 +128,8 @@ public class Client extends JFrame implements Runnable {
         }
     }
 
+
+    //This is will execute when user hits viewBlock contacts
     private void viewBlockedContacts() {
         if (blockedContacts.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No contacts are currently blocked.");
@@ -130,6 +140,24 @@ public class Client extends JFrame implements Runnable {
             blockedList.append(blocked).append("\n");
         }
         JOptionPane.showMessageDialog(this, blockedList.toString());
+    }
+
+    public void viewCreators(){
+        StringBuilder creators = new StringBuilder("Creators:\n");
+        creators.append("\tSami-ur-Rehman(https://github.com/SamiUrRehman2395)\nMuhammad Eman(https://github.com/Eman-07)\n");
+
+        JOptionPane.showMessageDialog(null, creators.toString());
+    }
+
+    //creating method to view all contacts
+    public void viewAllContacts() {
+        StringBuilder contactList = new StringBuilder("Contacts:\n");
+        for (Contact contact : contacts.values()) {
+            contactList.append(contact).append("\n");
+        }
+        JOptionPane.showMessageDialog(this, contactList.toString());
+
+
     }
 
     public void run() {
