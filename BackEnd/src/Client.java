@@ -182,6 +182,6 @@ public class Client extends JFrame implements Runnable {
     }
 
     public static void main(String[] args) {
-        new Client("192.168.100.19", 12345); // Replace with server IP address as needed
+        new Client("192.168.100.41", 12345); // Replace with server IP address as needed
     }
 }
