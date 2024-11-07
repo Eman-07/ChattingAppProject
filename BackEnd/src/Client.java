@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 public class Client extends JFrame implements Runnable {
     private Socket socket;
@@ -30,6 +31,17 @@ public class Client extends JFrame implements Runnable {
 
         JTextField inputField = new JTextField(20);
         JButton sendButton = new JButton("Send");
+
+
+        //Adding Function that if users press ENTER key then message will be sent
+        inputField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    sendButton.doClick();
+                }
+            }
+        });
+
         sendButton.addActionListener(e -> {
             String message = inputField.getText();
             if (!message.isEmpty()) {
