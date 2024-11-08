@@ -1,18 +1,43 @@
+import java.awt.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class Server extends JFrame implements Runnable {
     private ServerSocket serverSocket;
-    private JTextArea chatArea;
     private PrintWriter out;
     private Map<String, Contact> contacts = new HashMap<>();
     private List<BlockList> blockedContacts = new ArrayList<>();
 
-    public Server(int port) {
 
+    //Gui's Stuff
+
+        //Panels
+    private JPanel panel;
+    private JPanel topPanel;
+    private JPanel inputPanel;
+
+
+        //Gui Text Stuff
+    private JTextArea chatArea;
+    private JScrollPane scrollPane;
+    private JTextField inputField;
+
+        //Buttons
+    private JButton sendButton;
+    JButton manageContactsButton;
+    JButton creatorsInfoButton;
+    JButton toggleDarkModeButton;
+
+
+    private JOptionPane optionPane;
+
+    private boolean isDarkMode = false;
+
+    public Server(int port) {
         try {
             serverSocket = new ServerSocket(port);
             setupGUI();
@@ -24,12 +49,80 @@ public class Server extends JFrame implements Runnable {
     }
 
     private void setupGUI() {
+
+
+        //Application name and resolution
+        setTitle("ChatHub");
+        setSize(500, 500);
+
+
+        //Panels
+        panel = new JPanel();  //Like a main div
+        panel.setLayout(new BorderLayout());
+
+        topPanel = new JPanel();
+        inputPanel = new JPanel();
+
+
+
+
+
+        //Text Stuff
         chatArea = new JTextArea(20, 30);
         chatArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(chatArea);
+        scrollPane = new JScrollPane(chatArea);
+        inputField = new JTextField(20);
 
-        JTextField inputField = new JTextField(20);
-        JButton sendButton = new JButton("Send");
+
+
+        //Buttons & Action Listeners
+        sendButton = new JButton("Send");
+
+        manageContactsButton = new JButton("Manage Contacts");
+        manageContactsButton.addActionListener(e -> openContactManagement());
+
+        creatorsInfoButton = new JButton("Creators Info");
+        creatorsInfoButton.addActionListener(e -> viewCreators() );
+
+        toggleDarkModeButton = new JButton("Dark Mode");
+
+
+//  Adding Components to Panels
+
+        topPanel.add(manageContactsButton);
+        topPanel.add(creatorsInfoButton);
+        topPanel.add(toggleDarkModeButton);
+
+        inputPanel.add(inputField);
+        inputPanel.add(scrollPane);
+        inputPanel.add(sendButton);
+
+
+
+        panel.add(topPanel, BorderLayout.NORTH);
+        panel.add(inputPanel, BorderLayout.SOUTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+
+
+
+
+
+        //Setting app logo
+        ImageIcon logo = new ImageIcon("logo.png");
+        setIconImage(logo.getImage());
+
+
+
+        add(panel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+
+
+
+
+
 
         //Adding Function that if users press ENTER key then message will be sent
         inputField.addKeyListener(new KeyAdapter() {
@@ -48,42 +141,31 @@ public class Server extends JFrame implements Runnable {
             }
         });
 
-        JPanel panel = new JPanel();
-        panel.add(inputField);
-        panel.add(sendButton);
-
-        JButton manageContactsButton = new JButton("Manage Contacts");
-        manageContactsButton.addActionListener(e -> openContactManagement());
-
-//        JButton viewBlockedButton = new JButton("View Blocked Contacts");
-//        viewBlockedButton.addActionListener(e -> viewBlockedContacts());
-
-        //Adding button to Show creators of applicatio
-        JButton creatorsInfoButton = new JButton("Creators Info");
-        creatorsInfoButton.addActionListener(e -> viewCreators() );
 
 
-        JPanel topPanel = new JPanel();
-        topPanel.add(manageContactsButton);
-//        topPanel.add(viewBlockedButton);
-        topPanel.add(creatorsInfoButton);
-
-        add(topPanel, "North");
-        add(scrollPane, "Center");
-        add(panel, "South");
-
-        setTitle("ChatHub");
-        setSize(500, 500);
-
-        //Setting app name and logo
-        setTitle("ChatHub");
-        ImageIcon logo = new ImageIcon("logo.png");
-        setIconImage(logo.getImage());
 
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+
+
+        //Adding Darkmode Function
+        toggleDarkModeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isDarkMode = !isDarkMode;
+                if (isDarkMode) {
+                    setDarkMode();
+                    toggleDarkModeButton.setText("🌙");
+                } else {
+                    setLightMode();
+                    toggleDarkModeButton.setText("☀️");
+                }
+            }
+        });
+
+
+
     }
+
 
     private void preAddContacts() {
         contacts.put("1", new Contact("1", "Imad Wasim", "03039812367"));
@@ -191,19 +273,79 @@ public class Server extends JFrame implements Runnable {
             out.println(message);
             chatArea.append("Server: " + message + "\n");
         }
-//
-//        //Adding method that if user press ENTER key message will be sent
-//        chatArea.addKeyListener(new KeyAdapter() {
-//            public void keyPressed(KeyEvent e) {
-//                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//                    sendMessage(message);
-//                }
-//            }
-//        });
+
+    }
+
+
+
+
+    public void setDarkMode(){
+
+
+
+        topPanel.setBackground(Color.DARK_GRAY);
+        scrollPane.setBackground(Color.DARK_GRAY);
+
+        inputPanel.setBackground(Color.DARK_GRAY);
+
+        chatArea.setBackground(Color.GRAY);
+        chatArea.setForeground(Color.WHITE);
+
+        inputField.setBackground(Color.DARK_GRAY);
+        inputField.setForeground(Color.WHITE);
+
+        sendButton.setBackground(Color.BLACK);
+        sendButton.setForeground(Color.WHITE);
+
+        manageContactsButton.setBackground(Color.BLACK);
+        manageContactsButton.setForeground(Color.WHITE);
+
+        creatorsInfoButton.setBackground(Color.BLACK);
+        creatorsInfoButton.setForeground(Color.WHITE);
+
+        toggleDarkModeButton.setBackground(Color.BLACK);
+        toggleDarkModeButton.setForeground(Color.GRAY);
+
+
+//        optionPane.setBackground(Color.DARK_GRAY);
+//        optionPane.setForeground(Color.white);
+        UIManager.put("OptionPane.background", new Color(45, 45, 45));  // Background color
+        UIManager.put("Panel.background", new Color(45, 45, 45));       // Background color of the panel inside JOptionPane
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);     // Foreground color (text color)
 
 
 
     }
+
+
+    private void setLightMode() {
+        topPanel.setBackground(Color.LIGHT_GRAY);
+        panel.setBackground(Color.LIGHT_GRAY);
+        chatArea.setBackground(Color.WHITE);
+        chatArea.setForeground(Color.BLACK);
+
+        inputField.setBackground(Color.WHITE);
+        inputField.setForeground(Color.BLACK);
+
+        sendButton.setBackground(Color.WHITE);
+        sendButton.setForeground(Color.BLACK);
+
+        manageContactsButton.setBackground(Color.WHITE);
+        manageContactsButton.setForeground(Color.BLACK);
+
+        creatorsInfoButton.setBackground(Color.WHITE);
+        creatorsInfoButton.setForeground(Color.BLACK);
+        toggleDarkModeButton.setBackground(Color.WHITE);
+        toggleDarkModeButton.setForeground(Color.BLACK);
+
+
+
+        // Reset the UIManager properties if needed
+        UIManager.put("OptionPane.background", null);
+        UIManager.put("Panel.background", null);
+        UIManager.put("OptionPane.messageForeground", null);
+    }
+
 
     public static void main(String[] args) {
         new Server(12345);
