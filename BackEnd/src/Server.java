@@ -84,7 +84,7 @@ public class Server extends JFrame implements Runnable {
         creatorsInfoButton = new JButton("Creators Info");
         creatorsInfoButton.addActionListener(e -> viewCreators() );
 
-        toggleDarkModeButton = new JButton("Dark Mode");
+        toggleDarkModeButton = new JButton("☀️");
 
 
 //  Adding Components to Panels
@@ -291,8 +291,8 @@ public class Server extends JFrame implements Runnable {
         chatArea.setBackground(Color.GRAY);
         chatArea.setForeground(Color.WHITE);
 
-        inputField.setBackground(Color.DARK_GRAY);
-        inputField.setForeground(Color.WHITE);
+        inputField.setBackground(Color.LIGHT_GRAY);
+        inputField.setForeground(Color.BLACK);
 
         sendButton.setBackground(Color.BLACK);
         sendButton.setForeground(Color.WHITE);
@@ -326,6 +326,8 @@ public class Server extends JFrame implements Runnable {
 
         inputField.setBackground(Color.WHITE);
         inputField.setForeground(Color.BLACK);
+
+        inputPanel.setBackground(Color.WHITE);
 
         sendButton.setBackground(Color.WHITE);
         sendButton.setForeground(Color.BLACK);
