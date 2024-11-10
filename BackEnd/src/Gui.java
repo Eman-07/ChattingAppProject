@@ -29,6 +29,7 @@ public class Gui extends JFrame implements Runnable{
     private JButton chatHistoryButton = new JButton("Chat History");
     private JButton darkModeButton = new JButton("☀️");
     private JButton sendButton = new JButton("Send");
+    private JButton creatorsInfoButton = new JButton("Creators Info");
 
 
     //Gui Text Stuff
@@ -74,6 +75,7 @@ public class Gui extends JFrame implements Runnable{
         topPanel.add(manageContacts);
         topPanel.add(startChatButton);
         topPanel.add(chatHistoryButton);
+        topPanel.add(creatorsInfoButton);
 
         inputPanel.add(darkModeButton);
         inputPanel.add(scrollPane);
@@ -90,6 +92,7 @@ public class Gui extends JFrame implements Runnable{
         manageContacts.addActionListener(e-> manageContacts());
         startChatButton.addActionListener(e-> startChat());
         chatHistoryButton.addActionListener(e-> viewChatHistory());
+        creatorsInfoButton.addActionListener(e -> creatorsInfo());
 
 
 
@@ -139,6 +142,11 @@ public class Gui extends JFrame implements Runnable{
         });
     }
 
+    public void creatorsInfo(){
+        StringBuilder creators = new StringBuilder("Creators:\n");
+        creators.append("\tSami-ur-Rehman(https://github.com/SamiUrRehman2395)\nMuhammad Eman(https://github.com/Eman-07)\n");
+        JOptionPane.showMessageDialog(null, creators.toString());
+    }
     public void login() {
         String correctUsername = "eman";
         String correctPassword = "1234";
@@ -493,8 +501,8 @@ public class Gui extends JFrame implements Runnable{
         manageContacts.setBackground(Color.BLACK);
         manageContacts.setForeground(Color.WHITE);
 
-        // creatorsInfoButton.setBackground(Color.BLACK);
-        // creatorsInfoButton.setForeground(Color.WHITE);
+         creatorsInfoButton.setBackground(Color.BLACK);
+         creatorsInfoButton.setForeground(Color.WHITE);
 
         darkModeButton.setBackground(Color.BLACK);
         darkModeButton.setForeground(Color.WHITE);
@@ -533,8 +541,8 @@ public class Gui extends JFrame implements Runnable{
         manageContacts.setBackground(null);
         manageContacts.setForeground(null);
 
-        // creatorsInfoButton.setBackground(Color.WHITE);
-        // creatorsInfoButton.setForeground(Color.BLACK);
+         creatorsInfoButton.setBackground(Color.WHITE);
+         creatorsInfoButton.setForeground(Color.BLACK);
         darkModeButton.setBackground(null);
         darkModeButton.setForeground(Color.ORANGE);
 
