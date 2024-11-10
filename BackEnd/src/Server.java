@@ -19,7 +19,6 @@ public class Server extends Gui implements Runnable{
     private int contactIndex;
 
     public Server(int port){
-
     this.port = port;
     }
 

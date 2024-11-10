@@ -11,21 +11,36 @@ public class Client extends Gui implements Runnable {
     private Socket socket; // Changed to Socket for client-side connection
     private PrintWriter out;
 
+    private String serverAddress;
+    private int port;
+
+    private String contactId;
+    private Contact contact;
+    private int contactIndex;
+
+
+
     public Client(String serverAddress, int port) {
+        this.serverAddress = serverAddress;
+        this.port = port;
+    }
+
+    @Override
+    public String chatOnline() {
+
+        contactId = super.chatOnline();
+        contact = findContactById(contactId);
+
         try {
             socket = new Socket(serverAddress, port); // Client connects to the server
 
             new Thread(this).start(); // Start client thread
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Could not connect to server at " + serverAddress + ":" + port,
+            JOptionPane.showMessageDialog(this, "Could not connect to " + contact.getName() + " at " + serverAddress + ":" + port,
                     "Connection Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public String chatOnline() {
-        JOptionPane.showMessageDialog(null, "I am in server");
         return null;
     }
 
@@ -38,7 +53,8 @@ public class Client extends Gui implements Runnable {
 
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                getChatArea().append("Server: " + inputLine + "\n");
+                getChatArea().append(contact.getName()+" : " + inputLine + "\n");
+                getContacts().get(contactIndex).getChatHistory().add(new Sms(inputLine,contact.getName()));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,8 +65,10 @@ public class Client extends Gui implements Runnable {
     public void sendMessage(String message) {
         if (out != null) {
             out.println(message);
-            getChatArea().append("Client: " + message + "\n");
+            getChatArea().append("Me: " + message + "\n");
         }
+        getContacts().get(contactIndex).getChatHistory().add(new Sms(message,"You"));
+
     }
 
     public static void main(String[] args) {

@@ -368,7 +368,9 @@ public class Gui extends JFrame implements Runnable{
     }
 
 
-    public void chat(){}
+    public void chat(){
+        
+    }
 
     public String chatOnline(){
         StringBuilder data = new StringBuilder("Contacts : \n");
