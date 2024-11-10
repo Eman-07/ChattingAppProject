@@ -187,10 +187,10 @@ public class Gui extends JFrame implements Runnable{
         String name = JOptionPane.showInputDialog(this, "Enter Name:", "AddContact", JOptionPane.PLAIN_MESSAGE);
         String number = JOptionPane.showInputDialog(this, "Enter PhoneNumber:", "AddContact", JOptionPane.PLAIN_MESSAGE);
 
-        contacts.add(new Contact(name, number));
         if (name != null && number != null) {
-
             JOptionPane.showMessageDialog(null,"Contact Added Successfully");
+            contacts.add(new Contact(name, number));
+
         }
     }
 
@@ -198,7 +198,7 @@ public class Gui extends JFrame implements Runnable{
 
         StringBuilder data = new StringBuilder("Contacts : \n");
         if (contacts.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No Conatcs");
+            JOptionPane.showMessageDialog(null, "No Contacts");
         } else {
             for (Contact contact : contacts) {
                 data.append(contact.toString()).append("\n");
@@ -319,7 +319,7 @@ public class Gui extends JFrame implements Runnable{
     }
 
     public void preAddContacts() {
-        contacts.add(new Contact("Eman", "03039812367"));
+//        contacts.add(new Contact("Eman", "03039812367"));
 
     }
     public void viewAllContacts() {
@@ -369,7 +369,7 @@ public class Gui extends JFrame implements Runnable{
 
 
     public void chat(){
-        
+
     }
 
     public String chatOnline(){
@@ -516,7 +516,7 @@ public class Gui extends JFrame implements Runnable{
         sendButton.setBackground(Color.WHITE);
         sendButton.setForeground(Color.BLACK);
 
-        manageContacts.setBackground(Color.WHITE);
+        manageContacts.setBackground(null);
         manageContacts.setForeground(Color.BLACK);
 
         // creatorsInfoButton.setBackground(Color.WHITE);

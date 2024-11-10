@@ -101,6 +101,13 @@ public class Server extends Gui implements Runnable{
 
 
 
+    @Override
+    public void preAddContacts(){
+        getContacts().add(new Contact("Sami", "03039812367"));
+        getContacts().add(new Contact("Ali", "03114554894"));
+
+    }
+
 
     public static void main(String[] args) {
         Server n1 = new Server(12345);
