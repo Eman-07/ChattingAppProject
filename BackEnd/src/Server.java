@@ -12,22 +12,34 @@ public class Server extends Gui implements Runnable{
 
     private ServerSocket serverSocket;
     private PrintWriter out;
+    private int port;
+    private Contact contact;
 
     public Server(int port){
-        try {
+
+    this.port = port;
+    }
+
+
+
+    @Override
+    public Contact chatOnline(){
+
+        contact = super.chatOnline();
+
+        System.out.println(contact);
+
+            try {
             serverSocket = new ServerSocket(port);
             new Thread(this).start(); // Start server thread
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-    }
+
+            return null;
 
 
-    @Override
-    public void chatOnline(){
-
-        JOptionPane.showMessageDialog(null, "I am in server");
     }
 
 
@@ -47,11 +59,14 @@ public class Server extends Gui implements Runnable{
 
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                getChatArea().append("Client: " + inputLine + "\n");
+                getChatArea().append(contact.getName()+": " + inputLine + "\n");
+                contact.getChatHistory().add(new Sms(inputLine, contact.getName()));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
 

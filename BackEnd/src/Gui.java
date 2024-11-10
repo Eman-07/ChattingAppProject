@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.io.PrintWriter;
 
 
-public class Gui extends JFrame {
+public class Gui extends JFrame implements Runnable{
 
     private PrintWriter out;
 
@@ -219,7 +219,7 @@ public class Gui extends JFrame {
 
         }
     }
-    private Contact findContactById(String id) {
+    public Contact findContactById(String id) {
         for (Contact contact : contacts) {
             if (contact.getId().equals(id)) {
                 return contact;
@@ -236,7 +236,7 @@ public class Gui extends JFrame {
         return null;
     }
 
-    private void manageBlockedContacts() {
+    public void manageBlockedContacts() {
 
         String[] options = {"Block Contact", "UnBlock Contact", "View Block List", };
         int choice = JOptionPane.showOptionDialog(this, "Choose an option:", "Block Contacts Menu",
@@ -317,11 +317,11 @@ public class Gui extends JFrame {
         }
     }
 
-    private void preAddContacts() {
+    public void preAddContacts() {
         contacts.add(new Contact("Eman", "03039812367"));
 
     }
-    private void viewAllContacts() {
+    public void viewAllContacts() {
         StringBuilder data = new StringBuilder("Contacts : \n");
 
         if (contacts.isEmpty()) {
@@ -335,7 +335,7 @@ public class Gui extends JFrame {
 
     }
 
-    private void viewBlockedContacts() {
+    public void viewBlockedContacts() {
 
         StringBuilder data = new StringBuilder("Blocked Contacts : \n");
 
@@ -369,7 +369,7 @@ public class Gui extends JFrame {
 
     public void chat(){}
 
-    public void chatOnline(){
+    public Contact chatOnline(){
         StringBuilder data = new StringBuilder("Contacts : \n");
 
         if (contacts.isEmpty()) {
@@ -378,16 +378,22 @@ public class Gui extends JFrame {
             for (Contact contact : contacts) {
                 data.append(contact.toString()).append("\n");
             }
-
-
             data.append("Select Contact id to Start Chat With :");
-            JOptionPane.showMessageDialog(this, data.toString());
 
 
+            String id = JOptionPane.showInputDialog(this, data.toString());
+
+            Contact contact = findContactById(id);
+            return contact;
         }
 
 
+        return null;
+
     }
+
+
+
 
     //Chatting System
     // public void startChat(){
@@ -411,10 +417,6 @@ public class Gui extends JFrame {
     //         }
 
     //     }
-
-
-
-
 
 
 
@@ -637,4 +639,11 @@ public class Gui extends JFrame {
     public void setIsDark(Boolean isDark) {
         this.isDark = isDark;
     }
+
+    @Override
+    public void run() {
+
+    }
+
+
 }
