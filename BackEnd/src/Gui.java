@@ -82,6 +82,7 @@ public class Gui extends JFrame implements Runnable{
         //action listener
         manageContacts.addActionListener(e-> manageContacts());
         startChatButton.addActionListener(e-> startChat());
+        chatHistoryButton.addActionListener(e-> viewChatHistory());
 
         add(panel);
         // login();
@@ -369,7 +370,7 @@ public class Gui extends JFrame implements Runnable{
 
     public void chat(){}
 
-    public Contact chatOnline(){
+    public String chatOnline(){
         StringBuilder data = new StringBuilder("Contacts : \n");
 
         if (contacts.isEmpty()) {
@@ -384,7 +385,7 @@ public class Gui extends JFrame implements Runnable{
             String id = JOptionPane.showInputDialog(this, data.toString());
 
             Contact contact = findContactById(id);
-            return contact;
+            return id;
         }
 
 
@@ -393,7 +394,45 @@ public class Gui extends JFrame implements Runnable{
     }
 
 
+    public void viewChatHistory() {
 
+
+        StringBuilder data = new StringBuilder("Contacts : \n");
+
+        if (contacts.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No Contacts");
+        } else {
+            for (Contact contact : contacts) {
+                data.append(contact.toString()).append("\n");
+            }
+            data.append("Select Contact id to Start view Chat With :");
+
+            String id = JOptionPane.showInputDialog(this, data.toString());
+
+            int index = findContactIndex(id);
+
+            StringBuilder history = new StringBuilder("Chat History : \n");
+
+
+            for (Sms smshistory : contacts.get(index).getChatHistory()){
+                history.append(smshistory.toString()).append("\n");
+            }
+
+            JOptionPane.showMessageDialog(null, history.toString());
+        }
+    }
+
+
+    public int findContactIndex(String contactId){
+//        int index;
+        for (int i = 0; i < getContacts().size() ; i++){
+            if (getContacts().get(i).getId().equals(contactId)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
     //Chatting System
     // public void startChat(){

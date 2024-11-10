@@ -13,7 +13,10 @@ public class Server extends Gui implements Runnable{
     private ServerSocket serverSocket;
     private PrintWriter out;
     private int port;
+
+    private String contactId;
     private Contact contact;
+    private int contactIndex;
 
     public Server(int port){
 
@@ -23,11 +26,12 @@ public class Server extends Gui implements Runnable{
 
 
     @Override
-    public Contact chatOnline(){
+    public String chatOnline(){
 
-        contact = super.chatOnline();
+        contactId = super.chatOnline();
 
-        System.out.println(contact);
+        contact = findContactById(contactId);
+
 
             try {
             serverSocket = new ServerSocket(port);
@@ -49,10 +53,12 @@ public class Server extends Gui implements Runnable{
 
     @Override
     public void run() {
+        contactIndex = findContactIndex(contactId);
+
         try {
-            getChatArea().append("Waiting for client connection...\n");
+            getChatArea().append("Waiting for " +contact.getName() +" connection...\n");
             Socket clientSocket = serverSocket.accept();
-            getChatArea().append("Client connected.\n");
+            getChatArea().append(contact.getName()+" connected.\n");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -60,13 +66,24 @@ public class Server extends Gui implements Runnable{
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 getChatArea().append(contact.getName()+": " + inputLine + "\n");
-                contact.getChatHistory().add(new Sms(inputLine, contact.getName()));
+
+                getContacts().get(contactIndex).getChatHistory().add(new Sms(inputLine,contact.getName()));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
 
+    public int findContactIndex(String contactId){
+//        int index;
+        for (int i = 0; i < getContacts().size() ; i++){
+            if (getContacts().get(i).getId().equals(contactId)){
+                return i;
+            }
+        }
+
+        return -1;
     }
 
 
@@ -74,8 +91,12 @@ public class Server extends Gui implements Runnable{
     public void sendMessage(String message) {
         if (out != null) {
             out.println(message);
-            getChatArea().append("Server: " + message + "\n");
+            getChatArea().append("Me: " + message + "\n");
         }
+
+        getContacts().get(contactIndex).getChatHistory().add(new Sms(message,"You"));
+
+
 
     }
 

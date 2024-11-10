@@ -24,7 +24,7 @@ public class Client extends Gui implements Runnable {
     }
 
     @Override
-    public Contact chatOnline() {
+    public String chatOnline() {
         JOptionPane.showMessageDialog(null, "I am in server");
         return null;
     }
