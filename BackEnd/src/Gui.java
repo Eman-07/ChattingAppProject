@@ -38,19 +38,22 @@ public class Gui extends JFrame implements Runnable{
 
     private Boolean isDark = false;
 
-
+    private ImageIcon logo = new ImageIcon("logo.png");
 
 
     public Gui() {
+
+
+
         //pre additions
         preAddContacts();
 
 
         setTitle("ChatHub");
         setSize(500, 500);
-
-        ImageIcon logo = new ImageIcon("logo.png");
         setIconImage(logo.getImage());
+
+
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -87,6 +90,8 @@ public class Gui extends JFrame implements Runnable{
         manageContacts.addActionListener(e-> manageContacts());
         startChatButton.addActionListener(e-> startChat());
         chatHistoryButton.addActionListener(e-> viewChatHistory());
+
+
 
         add(panel);
         // login();
