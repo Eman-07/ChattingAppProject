@@ -488,7 +488,12 @@ public class Gui extends JFrame implements Runnable{
         // creatorsInfoButton.setForeground(Color.WHITE);
 
         darkModeButton.setBackground(Color.BLACK);
-        darkModeButton.setForeground(Color.GRAY);
+        darkModeButton.setForeground(Color.WHITE);
+
+        startChatButton.setBackground(Color.BLACK);
+        startChatButton.setForeground(Color.WHITE);
+        chatHistoryButton.setBackground(Color.BLACK);
+        chatHistoryButton.setForeground(Color.WHITE);
 
 
 //        optionPane.setBackground(Color.DARK_GRAY);
@@ -503,28 +508,31 @@ public class Gui extends JFrame implements Runnable{
 
 
     private void setLightMode() {
-        topPanel.setBackground(Color.LIGHT_GRAY);
-        panel.setBackground(Color.LIGHT_GRAY);
-        chatArea.setBackground(Color.WHITE);
-        chatArea.setForeground(Color.BLACK);
+        topPanel.setBackground(null);
+        panel.setBackground(null);
+        chatArea.setBackground(null);
+        chatArea.setForeground(null);
 
-        inputField.setBackground(Color.WHITE);
-        inputField.setForeground(Color.BLACK);
+        inputField.setBackground(null);
+        inputField.setForeground(null);
 
-        inputPanel.setBackground(Color.WHITE);
+        inputPanel.setBackground(null);
 
-        sendButton.setBackground(Color.WHITE);
-        sendButton.setForeground(Color.BLACK);
+        sendButton.setBackground(null);
+        sendButton.setForeground(null);
 
         manageContacts.setBackground(null);
-        manageContacts.setForeground(Color.BLACK);
+        manageContacts.setForeground(null);
 
         // creatorsInfoButton.setBackground(Color.WHITE);
         // creatorsInfoButton.setForeground(Color.BLACK);
-        darkModeButton.setBackground(Color.WHITE);
-        darkModeButton.setForeground(Color.BLACK);
+        darkModeButton.setBackground(null);
+        darkModeButton.setForeground(Color.ORANGE);
 
-
+        chatHistoryButton.setBackground(null);
+        chatHistoryButton.setForeground(null);
+        startChatButton.setBackground(null);
+        startChatButton.setForeground(null);
 
         // Reset the UIManager properties if needed
         UIManager.put("OptionPane.background", null);
