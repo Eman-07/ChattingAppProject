@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Sms {
+public class Sms implements Comparable{
     private String content;
     private LocalDateTime timestamp;
     private boolean isRead;
@@ -57,4 +57,11 @@ public class Sms {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return "[" + timestamp.format(dateFormatter) + "] " + sender + ": " + content;
     }
+
+    @Override
+    public int compareTo(Object o) {
+        Sms s = (Sms) o;
+        return s.getTimestamp().compareTo(this.timestamp); // Descending order
+    }
+
 }

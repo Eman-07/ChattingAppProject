@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Collection;
 
 public class Contact {
     private String id;
@@ -45,6 +47,9 @@ public class Contact {
         return "" + id + ".  " + name + "   " + phoneNumber;
     }
 
+    public void smsSorter() {
+        chatHistory.sort(Comparator.comparing(Sms::getTimestamp).reversed());
+    }
 
     public String getContactsInfo(){
         return String.format("\tID: %-03d | %-12s | %-12s",getId(),getName(),getPhoneNumber() );

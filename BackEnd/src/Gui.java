@@ -414,9 +414,11 @@ public class Gui extends JFrame implements Runnable{
             StringBuilder history = new StringBuilder("Chat History : \n");
 
 
+            contacts.get(index).smsSorter();
             for (Sms smshistory : contacts.get(index).getChatHistory()){
                 history.append(smshistory.toString()).append("\n");
             }
+
 
             JOptionPane.showMessageDialog(null, history.toString());
         }
