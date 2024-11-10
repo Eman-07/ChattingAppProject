@@ -48,6 +48,10 @@ public class Gui extends JFrame implements Runnable{
 
         setTitle("ChatHub");
         setSize(500, 500);
+
+        ImageIcon logo = new ImageIcon("logo.png");
+        setIconImage(logo.getImage());
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         panel = new JPanel();
