@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.awt.event.*;
 import java.io.PrintWriter;
+import java.util.*;
 
 
 public class Gui extends JFrame implements Runnable{
@@ -26,7 +27,7 @@ public class Gui extends JFrame implements Runnable{
 
     private JButton manageContacts = new JButton("Contacts");
     private JButton startChatButton = new JButton("Start Chat");
-    private JButton chatHistoryButton = new JButton("Chat History");
+    private JButton chatHistoryButton = new JButton("Chat Management");
     private JButton darkModeButton = new JButton("☀️");
     private JButton sendButton = new JButton("Send");
     private JButton creatorsInfoButton = new JButton("Creators Info");
@@ -48,6 +49,8 @@ public class Gui extends JFrame implements Runnable{
 
         //pre additions
         preAddContacts();
+        dummysms();
+
 
 
         setTitle("ChatHub");
@@ -91,7 +94,7 @@ public class Gui extends JFrame implements Runnable{
         //action listener
         manageContacts.addActionListener(e-> manageContacts());
         startChatButton.addActionListener(e-> startChat());
-        chatHistoryButton.addActionListener(e-> viewChatHistory());
+        chatHistoryButton.addActionListener(e-> chatManagement());
         creatorsInfoButton.addActionListener(e -> creatorsInfo());
 
 
@@ -385,8 +388,83 @@ public class Gui extends JFrame implements Runnable{
     }
 
 
-    public void chat(){
+    public void chatManagement(){
+        String[] options = {"View Chat History", "Delete Message"};
+        int choice = JOptionPane.showOptionDialog(this,"Choice an option:","Chat Management",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
+        switch (choice) {
+            case 0 -> viewChatHistory();
+            case 1 -> deleteMessage();
+
+        }
+
+    }
+
+    public void deleteMessage() {
+
+        StringBuilder data = new StringBuilder("Contacts : \n");
+
+        if (contacts.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No Contacts");
+        } else {
+            for (Contact contact : contacts) {
+                data.append(contact.toString()).append("\n");
+            }
+            data.append("Select Contact id to Start view Chat With :");
+
+            String id = JOptionPane.showInputDialog(this, data.toString());
+
+            int contactIndex = findContactIndex(id);
+
+            if (contactIndex == -1){
+                JOptionPane.showMessageDialog(null, "Invalid Contact Id");
+                return;
+            }
+
+
+            StringBuilder history = new StringBuilder("Chat History : \n");
+
+
+            contacts.get(contactIndex).smsSorter();
+            for (Sms smshistory : contacts.get(contactIndex).getChatHistory()){
+                history.append(smshistory.detail()).append("\n");
+            }
+
+            history.append("Select Sms Id to delete Sms");
+            String smsID = JOptionPane.showInputDialog(this, history.toString());
+
+
+            int smsIndex = getSmsIndexById(smsID, contactIndex);
+
+            if (smsIndex == -1 ){
+                JOptionPane.showMessageDialog(null, "Invalid Sms Id");
+                return;
+            }
+            else{
+                contacts.get(contactIndex).getChatHistory().remove(smsIndex);
+                JOptionPane.showMessageDialog(null, "Message Deleted Successfully");
+            }
+        }
+    }
+
+    public int getSmsIndexById(String id, int contactIndex){
+
+        for (int i = 0; i < contacts.get(contactIndex).getChatHistory().size(); i++) {
+            if (contacts.get(contactIndex).getChatHistory().get(i).getsmsId().equals(id)){
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+
+    public void dummysms(){
+        contacts.get(1).getChatHistory().add(new Sms("HI","Eman"));
+        contacts.get(1).getChatHistory().add(new Sms("kya hal hai","Eman"));
+    }
+    public void chat(){
+        JOptionPane.showMessageDialog(this,"Coming Soon");
     }
 
     public String chatOnline(){
@@ -414,8 +492,6 @@ public class Gui extends JFrame implements Runnable{
 
 
     public void viewChatHistory() {
-
-
         StringBuilder data = new StringBuilder("Contacts : \n");
 
         if (contacts.isEmpty()) {
@@ -429,6 +505,12 @@ public class Gui extends JFrame implements Runnable{
             String id = JOptionPane.showInputDialog(this, data.toString());
 
             int index = findContactIndex(id);
+
+            if (index == -1){
+                JOptionPane.showMessageDialog(null, "Invalid Contact Id");
+                return;
+            }
+
 
             StringBuilder history = new StringBuilder("Chat History : \n");
 
@@ -445,7 +527,7 @@ public class Gui extends JFrame implements Runnable{
 
 
     public int findContactIndex(String contactId){
-//        int index;
+
         for (int i = 0; i < getContacts().size() ; i++){
             if (getContacts().get(i).getId().equals(contactId)){
                 return i;
@@ -454,6 +536,7 @@ public class Gui extends JFrame implements Runnable{
 
         return -1;
     }
+
 
     //Chatting System
     // public void startChat(){
