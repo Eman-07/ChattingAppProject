@@ -51,7 +51,7 @@ public class Gui extends JFrame implements Runnable{
 
 
         setTitle("ChatHub");
-        setSize(500, 500);
+        setSize(600, 600);
         setIconImage(logo.getImage());
 
 
