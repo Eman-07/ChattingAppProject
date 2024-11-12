@@ -42,17 +42,23 @@ public class Contact {
         chatHistory.add(message);
     }
 
-    @Override
-    public String toString() {
-        return "" + id + ".  " + name + "   " + phoneNumber;
-    }
+   // @Override
+//    public String toString() {
+//        return "" + id + ".  " + name + "   " + phoneNumber;
+//    }
+   @Override
+   public String toString() {
+       return String.format("%-5s %-25s %-15s", id + ".", name, phoneNumber);
+   }
+
+
 
     public void smsSorter() {
         chatHistory.sort(Comparator.comparing(Sms::getTimestamp).reversed());
     }
 
     public String getContactsInfo(){
-        return String.format("\tID: %-03d | %-12s | %-12s",getId(),getName(),getPhoneNumber() );
+        return String.format("\tID: %-03d | %-12s | %-22s",getId(),getName(),getPhoneNumber() );
     }
 
 }
