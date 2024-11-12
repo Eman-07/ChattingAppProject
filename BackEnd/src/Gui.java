@@ -54,7 +54,7 @@ public class Gui extends JFrame implements Runnable{
 
 
         setTitle("ChatHub");
-        setSize(600, 600);
+        setSize(800, 800);
         setIconImage(logo.getImage());
 
 
@@ -103,13 +103,7 @@ public class Gui extends JFrame implements Runnable{
         // login();
         setVisible(true); // Make visible only if login isDark successful
 
-
-
-
-
-
-
-
+        setLightMode();
         //Adding Function that if users press ENTER key then message will be sent
         inputField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -608,36 +602,43 @@ public class Gui extends JFrame implements Runnable{
 
 
     private void setLightMode() {
-        topPanel.setBackground(null);
+
+        Color c = new Color(31, 154, 255, 255);
+        topPanel.setBackground(new Color(0, 128, 171));
         panel.setBackground(null);
-        chatArea.setBackground(null);
+        chatArea.setBackground(new Color(157, 215, 255));
         chatArea.setForeground(null);
 
-        inputField.setBackground(null);
+        inputField.setBackground(Color.white);
         inputField.setForeground(null);
 
-        inputPanel.setBackground(null);
+        inputPanel.setBackground(new Color(0, 128, 171));
 
-        sendButton.setBackground(null);
-        sendButton.setForeground(null);
+        sendButton.setBackground(c);
+        sendButton.setForeground(Color.white);
 
-        manageContacts.setBackground(null);
-        manageContacts.setForeground(null);
+        manageContacts.setBackground(c);
+        manageContacts.setForeground(Color.white);
 
-         creatorsInfoButton.setBackground(Color.WHITE);
-         creatorsInfoButton.setForeground(Color.BLACK);
-        darkModeButton.setBackground(null);
+         creatorsInfoButton.setBackground(c);
+         creatorsInfoButton.setForeground(Color.white);
+
+        darkModeButton.setBackground(c);
         darkModeButton.setForeground(Color.ORANGE);
 
-        chatHistoryButton.setBackground(null);
-        chatHistoryButton.setForeground(null);
-        startChatButton.setBackground(null);
-        startChatButton.setForeground(null);
+
+        chatHistoryButton.setBackground(c);
+        chatHistoryButton.setForeground(Color.white);
+        startChatButton.setBackground(c);
+        startChatButton.setForeground(Color.white);
 
         // Reset the UIManager properties if needed
         UIManager.put("OptionPane.background", null);
         UIManager.put("Panel.background", null);
         UIManager.put("OptionPane.messageForeground", null);
+
+
+        manageContacts.setBackground(c);
     }
 
 
@@ -795,6 +796,4 @@ public class Gui extends JFrame implements Runnable{
     public void run() {
 
     }
-
-
 }
