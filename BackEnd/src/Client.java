@@ -35,8 +35,8 @@ public class Client extends Gui implements Runnable {
 
         try {
             socket = new Socket(serverAddress, port); // Client connects to the server
-
             new Thread(this).start(); // Start client thread
+            getChatArea().append("Successfully connected to " + contact.getName()+"\n");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Could not connect to " + contact.getName() + " at " + serverAddress + ":" + port,
                     "Connection Error", JOptionPane.ERROR_MESSAGE);
