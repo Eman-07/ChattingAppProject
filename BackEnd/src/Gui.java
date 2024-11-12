@@ -49,7 +49,7 @@ public class Gui extends JFrame implements Runnable{
 
         //pre additions
         preAddContacts();
-        dummysms();
+        //dummysms();
 
 
 
