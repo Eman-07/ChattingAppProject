@@ -20,8 +20,8 @@ public class Client extends Gui implements Runnable {
 
 
 
-    public Client(String serverAddress, int port) {
-        this.serverAddress = serverAddress;
+    public Client( int port) {
+//        this.serverAddress = serverAddress;
         this.port = port;
     }
 
@@ -30,6 +30,8 @@ public class Client extends Gui implements Runnable {
 
         contactId = super.chatOnline();
         contact = findContactById(contactId);
+
+        serverAddress = JOptionPane.showInputDialog(this,"Enter IP Address of Server : ");
 
         try {
             socket = new Socket(serverAddress, port); // Client connects to the server
@@ -80,6 +82,6 @@ public class Client extends Gui implements Runnable {
     }
 
     public static void main(String[] args) {
-        Client n1 = new Client("192.168.100.41", 12345);
+        Client n1 = new Client( 12345);
     }
 }
