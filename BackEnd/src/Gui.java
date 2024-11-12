@@ -596,6 +596,9 @@ public class Gui extends JFrame implements Runnable{
         UIManager.put("Panel.background", new Color(45, 45, 45));       // Background color of the panel inside JOptionPane
         UIManager.put("OptionPane.messageForeground", Color.WHITE);     // Foreground color (text color)
 
+        UIManager.put("Button.background", null);
+        UIManager.put("Button.foreground", null);
+
 
 
     }
@@ -639,6 +642,18 @@ public class Gui extends JFrame implements Runnable{
 
 
         manageContacts.setBackground(c);
+
+
+        UIManager.put("OptionPane.background", new Color(157, 215, 255));  // Background color
+        UIManager.put("Panel.background", new Color(157, 215, 255));       // Background color of the panel inside JOptionPane
+        UIManager.put("OptionPane.messageForeground", Color.BLACK);     // Foreground color (text color)
+//        UIManager.put("Panel.background", Color.yellow);
+        UIManager.put("Button.background", new Color(31, 154, 255, 255));
+        UIManager.put("Button.foreground", Color.white);
+
+
+
+
     }
 
 

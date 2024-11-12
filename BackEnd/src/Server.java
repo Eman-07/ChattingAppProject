@@ -105,6 +105,9 @@ public class Server extends Gui implements Runnable{
     public void preAddContacts(){
         getContacts().add(new Contact("Sami", "03039812367"));
         getContacts().add(new Contact("Ali", "03114554894"));
+        getContacts().add(new Contact("Aliyan", "03114554894"));
+        getContacts().add(new Contact("Wajahat Nazir Warraich", "03114554894"));
+
 
     }
 

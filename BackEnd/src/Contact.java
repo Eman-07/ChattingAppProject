@@ -48,7 +48,7 @@ public class Contact {
 //    }
    @Override
    public String toString() {
-       return String.format("%-5s %-25s %-15s", id + ".", name, phoneNumber);
+       return String.format("%s.   %-25s\n      %-25s",id,name,phoneNumber);
    }
 
 
