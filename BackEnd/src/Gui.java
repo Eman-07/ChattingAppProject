@@ -141,7 +141,7 @@ public class Gui extends JFrame implements Runnable{
 
     public void creatorsInfo(){
         StringBuilder creators = new StringBuilder("Creators:\n");
-        creators.append("\tSami-ur-Rehman(https://github.com/SamiUrRehman2395)\nMuhammad Eman(https://github.com/Eman-07)\n");
+        creators.append("\tSami-ur-Rehman (https://github.com/SamiUrRehman2395)\nMuhammad Eman (https://github.com/Eman-07)\n");
         JOptionPane.showMessageDialog(null, creators.toString());
     }
     public void login() {
