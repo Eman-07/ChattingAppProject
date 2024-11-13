@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class Client extends Gui implements Runnable {
 
@@ -79,6 +79,42 @@ public class Client extends Gui implements Runnable {
         getContacts().add(new Contact("Gen.Asim Munir", "+45941919449"));
 
 
+
+
+    }
+
+    @Override
+    public void login(){
+        String correctUsername = "sami";
+        String correctPassword = "2395";
+
+        // Prompt for username
+        String username = JOptionPane.showInputDialog(this, "Enter Username:", "Login", JOptionPane.PLAIN_MESSAGE);
+        if (username == null) {
+            // User canceled, exit the program
+            JOptionPane.showMessageDialog(this, "Login canceled.");
+            bye();
+        }
+
+        // Prompt for password
+        JPasswordField passwordField = new JPasswordField();
+        int option = JOptionPane.showConfirmDialog(this, passwordField, "Enter Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String password = new String(passwordField.getPassword());
+
+            // Check if entered credentials match the correct ones
+            if (username.equals(correctUsername) && password.equals(correctPassword)) {
+                JOptionPane.showMessageDialog(this, "Login successful! Welcome, " + username + "!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Login failed! Incorrect username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+                login(); // Retry login if the credentials are incorrect
+            }
+        } else {
+            // User canceled at the password dialog, exit the program
+            JOptionPane.showMessageDialog(this, "Login canceled.");
+            super.bye();
+        }
     }
 
     public static void main(String[] args) {

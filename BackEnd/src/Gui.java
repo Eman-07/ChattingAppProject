@@ -100,7 +100,7 @@ public class Gui extends JFrame implements Runnable{
 
 
         add(panel);
-        // login();
+         login();
         setVisible(true); // Make visible only if login isDark successful
 
         setLightMode();
@@ -145,37 +145,7 @@ public class Gui extends JFrame implements Runnable{
         JOptionPane.showMessageDialog(null, creators.toString());
     }
     public void login() {
-        String correctUsername = "eman";
-        String correctPassword = "1234";
-
-        // Prompt for username
-        String username = JOptionPane.showInputDialog(this, "Enter Username:", "Login", JOptionPane.PLAIN_MESSAGE);
-        if (username == null) {
-            // User canceled, exit the program
-            JOptionPane.showMessageDialog(this, "Login canceled.");
-            bye();
-        }
-
-        // Prompt for password
-        JPasswordField passwordField = new JPasswordField();
-        int option = JOptionPane.showConfirmDialog(this, passwordField, "Enter Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        if (option == JOptionPane.OK_OPTION) {
-            String password = new String(passwordField.getPassword());
-
-            // Check if entered credentials match the correct ones
-            if (username.equals(correctUsername) && password.equals(correctPassword)) {
-                JOptionPane.showMessageDialog(this, "Login successful! Welcome, " + username + "!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Login failed! Incorrect username or password.", "Error", JOptionPane.ERROR_MESSAGE);
-                login(); // Retry login if the credentials are incorrect
-            }
-        } else {
-            // User canceled at the password dialog, exit the program
-            JOptionPane.showMessageDialog(this, "Login canceled.");
-            bye();
-        }
-    }
+          }
     public void bye() {
 
         JOptionPane.showMessageDialog(null, "Thanks for using the software.");
