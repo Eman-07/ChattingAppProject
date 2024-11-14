@@ -76,7 +76,9 @@ public class Client extends Gui implements Runnable {
     @Override
     public void preAddContacts(){
         getContacts().add(new Contact("Eman", "03039812367"));
-        getContacts().add(new Contact("Gen.Asim Munir", "+45941919449"));
+        getContacts().add(new Contact("Haider", "03441919449"));
+        getContacts().add(new Contact("Haroon", "03004534138"));
+        getContacts().add(new Contact("Ahtisham", "03217356066"));
 
 
 

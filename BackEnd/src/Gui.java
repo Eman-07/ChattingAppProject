@@ -375,7 +375,7 @@ public class Gui extends JFrame implements Runnable{
             for (Contact contact : contacts) {
                 data.append(contact.toString()).append("\n");
             }
-            data.append("Select Contact id to Start view Chat With :");
+            data.append("Select Contact id to Delete Messages:");
 
             String id = JOptionPane.showInputDialog(this, data.toString());
 
@@ -395,7 +395,7 @@ public class Gui extends JFrame implements Runnable{
                 history.append(smshistory.detail()).append("\n");
             }
 
-            history.append("Select Sms Id to delete Sms");
+            history.append("\nSelect Sms Id to delete Sms");
             String smsID = JOptionPane.showInputDialog(this, history.toString());
 
 
@@ -440,7 +440,7 @@ public class Gui extends JFrame implements Runnable{
             for (Contact contact : contacts) {
                 data.append(contact.toString()).append("\n");
             }
-            data.append("Select Contact id to Start Chat With :");
+            data.append("\nSelect Contact id to Start Chat With :");
 
 
             String id = JOptionPane.showInputDialog(this, data.toString());
@@ -464,7 +464,7 @@ public class Gui extends JFrame implements Runnable{
             for (Contact contact : contacts) {
                 data.append(contact.toString()).append("\n");
             }
-            data.append("Select Contact id to Start view Chat With :");
+            data.append("\nSelect Contact Id to View Chat With :");
 
             String id = JOptionPane.showInputDialog(this, data.toString());
 
@@ -576,10 +576,10 @@ public class Gui extends JFrame implements Runnable{
 
     private void setLightMode() {
 
-        Color c = new Color(31, 154, 255, 255);
+        Color c = new Color(54, 164, 255, 255);
         topPanel.setBackground(new Color(0, 128, 171));
         panel.setBackground(null);
-        chatArea.setBackground(new Color(157, 215, 255));
+        chatArea.setBackground(new Color(169, 221, 255));
         chatArea.setForeground(null);
 
         inputField.setBackground(Color.white);
